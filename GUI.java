@@ -59,10 +59,13 @@ public class GUI extends GraphicsProgram implements Iterable
 
 	private void tick() 
 	{
-		//trailTop.move(1, 0);
+		trailTop.move(5, 0);
 		for (GImage trail : trailBG) 
 		{
-			trail.move(1, 0);
+			if (trail.getX()>=800)
+			{
+				trail.move(-1600-(trail.getX()-800),0);
+			}
 		}
 
 	}
