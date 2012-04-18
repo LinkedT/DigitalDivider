@@ -16,41 +16,34 @@ public class GUI extends GraphicsProgram implements Iterable
 	protected static final int SCREEN_HEIGHT = 480;
 	Random random = new Random();	
 	GImage BG;
-	GImage trailBot;
-	GImage trailMid;
-	GImage trailTop;
-	GImage trailBot2;
-	GImage trailMid2;
-	GImage trailTop2;
 
+	private List<ParallaxingBackground> trailBG = new ArrayList<ParallaxingBackground>();
 
-	private List<GImage> trailBG = new ArrayList<GImage>();
-
-	public void run() {
+	public void run() 
+	{
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		BG = new GImage("digitalDivider/content/BG.jpg");
-		trailBot = new GImage("digitalDivider/content/TrailBot.png");
-		trailMid = new GImage("digitalDivider/content/TrailMid.png");
-		trailTop = new GImage("digitalDivider/content/TrailTop.png");
-		trailBot2 = new GImage("digitalDivider/content/TrailBot.png");
-		trailMid2 = new GImage("digitalDivider/content/TrailMid.png");
-		trailTop2 = new GImage("digitalDivider/content/TrailTop.png");
-		
+
+		//GImage t = new GImage("digitalDivider/content/TrailTop.png");
 		add(BG,0,0);
-		add(trailBot,0,174);
-		add(trailBot2,-800,174);
-		add(trailMid,0,142);
-		add(trailMid2,-800,142);
-		add(trailTop,0,121);
-		add(trailTop2,-800,121);
-		trailBG.add(trailTop);
-		trailBG.add(trailMid);
+		//add(t,0,142);
+		ParallaxingBackground trailBot = new ParallaxingBackground("TrailBot",0,174,1, this);
+		ParallaxingBackground trailBot2 = new ParallaxingBackground("TrailBot",-800,174,1, this);
+		ParallaxingBackground trailMid = new ParallaxingBackground("TrailMid",0,142,2, this);
+		ParallaxingBackground trailMid2 = new ParallaxingBackground("TrailMid",-800,142,2, this);
+		ParallaxingBackground trailTop = new ParallaxingBackground("TrailTop",0,121,3, this);
+		ParallaxingBackground trailTop2 = new ParallaxingBackground("TrailTop",-800,121,3, this);
+		
 		trailBG.add(trailBot);
-		trailBG.add(trailTop2);
-		trailBG.add(trailMid2);
 		trailBG.add(trailBot2);
+		trailBG.add(trailMid);
+		trailBG.add(trailMid2);
+		trailBG.add(trailTop);
+		trailBG.add(trailTop2);
+
 		new SwingTimer(1000 / 24, this).start();
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -59,14 +52,15 @@ public class GUI extends GraphicsProgram implements Iterable
 
 	private void tick() 
 	{
-		trailTop.move(5, 0);
-		for (GImage trail : trailBG) 
+		for (ParallaxingBackground trail : trailBG) 
 		{
-			if (trail.getX()>=800)
-			{
-				trail.move(-1600-(trail.getX()-800),0);
-			}
+			trail.tick();
 		}
 
+	}
+	
+	public void removeObjects()
+	{
+		this.removeAll();
 	}
 }
