@@ -23,17 +23,14 @@ public class GUI extends GraphicsProgram implements Iterable
 	{
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		BG = new GImage("digitalDivider/content/BG.jpg");
-
-		//GImage t = new GImage("digitalDivider/content/TrailTop.png");
 		add(BG,0,0);
-		//add(t,0,142);
+		
 		ParallaxingBackground trailBot = new ParallaxingBackground("TrailBot",0,174,1, this);
 		ParallaxingBackground trailBot2 = new ParallaxingBackground("TrailBot",-800,174,1, this);
 		ParallaxingBackground trailMid = new ParallaxingBackground("TrailMid",0,142,2, this);
 		ParallaxingBackground trailMid2 = new ParallaxingBackground("TrailMid",-800,142,2, this);
 		ParallaxingBackground trailTop = new ParallaxingBackground("TrailTop",0,121,3, this);
 		ParallaxingBackground trailTop2 = new ParallaxingBackground("TrailTop",-800,121,3, this);
-		
 		trailBG.add(trailBot);
 		trailBG.add(trailBot2);
 		trailBG.add(trailMid);
